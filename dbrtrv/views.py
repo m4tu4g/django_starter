@@ -9,9 +9,10 @@ def index(request):
     return render(request, "index.html")
 
 def add(request):
-    namein = request.POST.get('first_name')
-    Fren(name= namein).save()
-    return HttpResponse(f"Added {namein} as fren into DB")
+    jsonfilein = request.POST.get('first_name')
+    for namein in json.load(jsonfilein)['name']:    
+        Fren(name= namein).save()
+    return HttpResponse(f"Added json objects into DB")
 
 def rtrvdata(request):
     reslist=[]
